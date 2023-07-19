@@ -1,0 +1,37 @@
+ARG CTR_REGISTRY
+FROM $CTR_REGISTRY/fsm-os:ubuntu20.04 as rootfs
+
+# Disable Prompt During Packages Installation
+ARG DEBIAN_FRONTEND=noninteractive
+ARG GO_LDFLAGS
+
+WORKDIR /fsm
+COPY . .
+
+# Make fsmxlb eBPF filesystem dir
+RUN mkdir -p /opt/fsmxlb
+RUN mkdir -p /opt/fsmxlb/cert
+
+# Install fsm-xlb
+RUN make subsys
+RUN --mount=type=cache,target=/root/.cache/go-build --mount=type=cache,target=/root/go/pkg CGO_ENABLED=1 GOOS=$TARGETOS GOARCH=$TARGETARCH GO_LDFLAGS="\"$GO_LDFLAGS\"" make build && cp ./bin/fsm-xlb /usr/local/sbin/fsm-xlb
+
+# Install fsmxlb cli with autocompletion
+RUN --mount=type=cache,target=/root/.cache/go-build --mount=type=cache,target=/root/go/pkg CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GO_LDFLAGS="\"$GO_LDFLAGS\"" make build-cli  && cp ./bin/fsmxlbc /usr/local/sbin/fsmxlbc
+RUN /usr/local/sbin/fsmxlbc completion bash > /etc/bash_completion.d/fsmxlbc_completion
+RUN echo "if [ -f /etc/bash_completion ] && ! shopt -oq posix; then" >> /root/.bashrc && \
+    echo "    . /etc/bash_completion" >> /root/.bashrc && \
+    echo "fi" >> /root/.bashrc
+
+RUN rm -fr * .git* /usr/local/go
+
+FROM scratch
+# LABEL about the fsm-xlb image
+LABEL description="This is fsm-xlb official Docker Image"
+LABEL maintainer="baili@flomesh.io"
+COPY --from=rootfs / /
+
+ENTRYPOINT ["/usr/local/sbin/fsm-xlb"]
+
+# Expose Ports
+EXPOSE 11111 22222

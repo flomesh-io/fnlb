@@ -1,0 +1,34 @@
+# Download base image ubuntu 20.04
+FROM ubuntu:20.04
+ARG TARGETOS
+ARG TARGETARCH
+
+# LABEL about the fsmxlb image
+LABEL description="This is fsmxlb official Docker Image"
+
+# Disable Prompt During Packages Installation
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Update Ubuntu Software repository
+RUN apt update
+RUN apt install -y wget
+
+# Install arch specific packages - gcc-multilib
+RUN arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && echo $arch && if [ "$arch" = "arm64" ] ; then apt install -y gcc-multilib-arm-linux-gnueabihf; else apt update && apt install -y  gcc-multilib;fi
+
+# Install fsmxlb related packages
+RUN apt install -y clang llvm libelf-dev libpcap-dev vim net-tools elfutils dwarves git libbsd-dev bridge-utils wget arping unzip build-essential bison flex sudo iproute2 pkg-config tcpdump iputils-ping keepalived curl bash-completion && rm -rf /var/lib/apt/lists/* && apt clean
+
+RUN wget https://github.com/cybwan/iproute2/archive/refs/heads/fsmxlb.zip && unzip fsmxlb.zip && \
+    cd iproute2-fsmxlb/libbpf/src/ && mkdir build && DESTDIR=build make install && cd - && \
+    cd iproute2-fsmxlb/ && export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:`pwd`/libbpf/src/ && LIBBPF_FORCE=on LIBBPF_DIR=`pwd`/libbpf/src/build ./configure && make && cp -f tc/tc /usr/local/sbin/ntc && cd - && cd iproute2-fsmxlb/libbpf/src/ && make install && cd - && rm -fr fsmxlb.zip iproute2-fsmxlb
+
+# Build bpftool
+RUN git clone --recurse-submodules https://github.com/libbpf/bpftool.git && cd bpftool/src/ && make clean && make -j $(nproc) && cp -f ./bpftool /usr/local/sbin/bpftool && cd - && rm -fr bpftool
+
+# Install gobgpd
+RUN arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && echo https://github.com/osrg/gobgp/releases/download/v3.5.0/gobgp_3.5.0_linux_${arch}.tar.gz.tar.gz && wget https://github.com/osrg/gobgp/releases/download/v3.5.0/gobgp_3.5.0_linux_${arch}.tar.gz && tar -xzf gobgp_3.5.0_linux_${arch}.tar.gz && rm gobgp_3.5.0_linux_${arch}.tar.gz LICENSE README.md && mv gobgp* /usr/sbin/
+
+# Install arch specific packages - golang
+RUN arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) && echo https://go.dev/dl/go1.19.linux-${arch}.tar.gz && wget https://go.dev/dl/go1.19.linux-${arch}.tar.gz && tar -xzf go1.19.linux-${arch}.tar.gz --directory /usr/local/ && rm go1.19.linux-${arch}.tar.gz
+ENV PATH="${PATH}:/usr/local/go/bin"

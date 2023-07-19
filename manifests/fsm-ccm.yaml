@@ -1,0 +1,99 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fsm-ccm
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: system:cloud-controller-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: fsm-ccm
+    namespace: kube-system
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fsm-ccm-config
+  namespace: kube-system
+data:
+  fsmccmConfigs: |
+    apiServerURL: 
+    apiServerURL: 
+    - "http://${fsmxlb_api_server_addr}:11111"
+    externalCIDR: "${fsmxlb_external_cidr}"
+    setBGP: true
+    setLBMode: 1
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    k8s-app: fsm-ccm
+  name: fsm-ccm
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      k8s-app: fsm-ccm
+  template:
+    metadata:
+      labels:
+        k8s-app: fsm-ccm
+    spec:
+      serviceAccountName: fsm-ccm
+      containers:
+        - name: fsm-ccm
+          imagePullPolicy: Always
+          # for in-tree providers we use k8s.gcr.io/cloud-controller-manager
+          # this can be replaced with any other image for out-of-tree providers
+          image: cybwan/fsm-ccm:latest
+          command:
+            - /fsm-ccm
+          args:
+            - --v=1
+            - --cloud-provider=flomesh
+            # - --cluster-name=kubernetes-2
+            - --use-service-account-credentials
+            # - --address=127.0.0.1
+            - --leader-elect-resource-name=fsm-ccm
+            # these flags will vary for every cloud provider
+            #- --cloud-config=""
+            #- --leader-elect=true
+            #- --allocate-node-cidrs=true
+            #- --configure-cloud-routes=true
+            #- --cluster-cidr=172.17.0.0/16
+          #volumeMounts:
+          #  - name: fsm-ccm-config
+          #    mountPath: /etc/fsmccm
+          #    readOnly: true
+          env:
+            - name: FSM_CCM_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: fsm-ccm-config
+                  key: fsmccmConfigs
+      tolerations:
+        # this is required so CCM can bootstrap itself
+        - key: node.cloudprovider.kubernetes.io/uninitialized
+          value: "true"
+          effect: NoSchedule
+        # this is to have the daemonset runnable on master nodes
+        # the taint may vary depending on your cluster setup
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+      # this is to restrict CCM to only run on master nodes
+      # the node selector may vary depending on your cluster setup
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: ""
+      #volumes:
+      #  - name: fsm-ccm-config
+      #    configMap:
+      #      name: fsm-ccm-config

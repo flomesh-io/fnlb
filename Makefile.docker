@@ -1,0 +1,101 @@
+#!make
+
+TARGETS      := darwin/amd64 darwin/arm64 linux/amd64 linux/arm64
+DIST_DIRS    := find * -type d -exec
+CTR_REGISTRY ?= cybwan
+CTR_TAG      ?= latest
+VERIFY_TAGS  ?= false
+
+DOCKER_BUILDX_PLATFORM ?= linux/amd64
+DOCKER_BUILDX_PLATFORM ?= linux/amd64
+DOCKER_BUILDX_OUTPUT ?= type=registry
+
+VERSION ?= dev
+BUILD_DATE ?=
+GIT_SHA=$$(git rev-parse HEAD)
+BUILD_DATE_VAR := github.com/cybwan/fsmxlb/pkg/version.BuildDate
+BUILD_VERSION_VAR := github.com/cybwan/fsmxlb/pkg/version.Version
+BUILD_GITCOMMIT_VAR := github.com/cybwan/fsmxlb/pkg/version.GitCommit
+DOCKER_GO_VERSION = 1.19
+
+GO_LDFLAGS ?= "-X $(BUILD_DATE_VAR)=$(BUILD_DATE) -X $(BUILD_VERSION_VAR)=$(VERSION) -X $(BUILD_GITCOMMIT_VAR)=$(GIT_SHA) -s -w"
+
+.PHONY: docker-build-fsm-os
+docker-build-fsm-os:
+	docker buildx build --builder fsm --platform=$(DOCKER_BUILDX_PLATFORM) -o $(DOCKER_BUILDX_OUTPUT) -t $(CTR_REGISTRY)/fsm-os:ubuntu20.04 -f dockerfiles/Dockerfile.fsm-os .
+
+.PHONY: docker-build-fsm-xlb
+docker-build-fsm-xlb:
+	docker buildx build --builder fsm --platform=$(DOCKER_BUILDX_PLATFORM) -o $(DOCKER_BUILDX_OUTPUT) -t $(CTR_REGISTRY)/fsm-xlb:$(CTR_TAG) -f dockerfiles/Dockerfile.fsm-xlb --build-arg GO_LDFLAGS=$(GO_LDFLAGS) --build-arg CTR_REGISTRY=$(CTR_REGISTRY) .
+
+.PHONY: docker-build-fsm-ccm
+docker-build-fsm-ccm:
+	docker buildx build --builder fsm --platform=$(DOCKER_BUILDX_PLATFORM) -o $(DOCKER_BUILDX_OUTPUT) -t $(CTR_REGISTRY)/fsm-ccm:$(CTR_TAG) -f dockerfiles/Dockerfile.fsm-ccm --build-arg GO_VERSION=$(DOCKER_GO_VERSION) --build-arg LDFLAGS=$(LDFLAGS) .
+
+FSM_TARGETS = fsm-os fsm-xlb fsm-ccm
+DOCKER_FSM_TARGETS = $(addprefix docker-build-, $(FSM_TARGETS))
+
+.PHONY: docker-build-fsm
+docker-build-fsm: $(DOCKER_FSM_TARGETS)
+
+.PHONY: docker-registry
+docker-registry:
+	@if ! docker ps -f name=registry | grep -w registry; then docker run -d --restart=always -p "0.0.0.0:5000:5000" --name registry registry:2; fi
+
+.PHONY: buildx-context
+buildx-context:
+	@if ! docker buildx ls | grep -q "^fsm "; then docker buildx create --name fsm --driver-opt network=host; fi
+
+check-image-exists-%: NAME=$(@:check-image-exists-%=%)
+check-image-exists-%:
+	@if [ "$(VERIFY_TAGS)" = "true" ]; then scripts/image-exists.sh $(CTR_REGISTRY)/$(NAME):$(CTR_TAG); fi
+
+$(foreach target,$(FSM_TARGETS),$(eval docker-build-$(target): check-image-exists-$(target) buildx-context))
+
+docker-digest-%: NAME=$(@:docker-digest-%=%)
+docker-digest-%:
+	@docker buildx imagetools inspect $(CTR_REGISTRY)/$(NAME):$(CTR_TAG) --raw | $(SHA256) | awk '{print "$(NAME): sha256:"$$1}'
+
+.PHONY: docker-digests-fsm-xlb
+docker-digests-fsm-xlb: $(addprefix docker-digest-, $(FSM_TARGETS))
+
+.PHONY: docker-build
+docker-build: docker-build-fsm
+
+.PHONY: docker-build-cross-fsm-os docker-build-cross-fsm-xlb docker-build-cross-fsm-ccm docker-build-cross
+docker-build-cross-fsm-os: DOCKER_BUILDX_PLATFORM=linux/amd64,linux/arm64
+docker-build-cross-fsm-os: docker-build-fsm-os
+docker-build-cross-fsm-xlb: DOCKER_BUILDX_PLATFORM=linux/amd64,linux/arm64
+docker-build-cross-fsm-xlb: docker-build-fsm-xlb
+docker-build-cross-fsm-ccm: DOCKER_BUILDX_PLATFORM=linux/amd64,linux/arm64
+docker-build-cross-fsm-ccm: docker-build-fsm-ccm
+docker-build-cross: docker-build-cross-fsm-os docker-build-cross-fsm-xlb docker-build-cross-fsm-ccm
+
+dock ?= fsmxlb
+
+fsmxlbid = $(shell docker ps -f name=$(dock) | grep -w $(dock) | cut  -d " "  -f 1 | grep -iv  "CONTAINER")
+
+.PHONY: docker-fsmxlb-run
+docker-fsmxlb-run:
+	@if ! docker ps -f name=$(dock) | grep -w $(dock); then docker run -u root --cap-add SYS_ADMIN --restart unless-stopped --privileged -dit -v /dev/log:/dev/log --name $(dock) $(CTR_REGISTRY)/fsm-xlb:$(CTR_TAG); fi
+
+.PHONY: docker-fsmxlb-cp
+docker-fsmxlb-cp:
+	docker cp /opt/fsmxlb/llb_ebpf_main.o $(fsmxlbid):/opt/fsmxlb/llb_ebpf_main.o
+	docker cp /opt/fsmxlb/llb_xdp_main.o $(fsmxlbid):/opt/fsmxlb/llb_xdp_main.o
+	docker cp bin/fsmxlb  $(fsmxlbid):/usr/local/sbin/
+	docker cp bin/fsmxlbc $(fsmxlbid):/usr/local/sbin/
+
+.PHONY: docker-fsmxlb-cp-ebpf
+docker-fsmxlb-cp-ebpf:
+	docker cp /opt/fsmxlb/llb_ebpf_main.o $(fsmxlbid):/opt/fsmxlb/llb_ebpf_main.o
+	docker cp /opt/fsmxlb/llb_xdp_main.o $(fsmxlbid):/opt/fsmxlb/llb_xdp_main.o
+
+.PHONY: docker-fsmxlb-bash
+docker-fsmxlb-bash:
+	docker exec -it $(dock) bash
+
+.PHONY: docker-fsmxlb-reset
+docker-fsmxlb-reset:
+	@if docker ps -f name=$(dock) | grep -w $(dock); then docker stop $(dock);docker rm $(dock); fi
+	docker rmi $(CTR_REGISTRY)/fsm-xlb:$(CTR_TAG)

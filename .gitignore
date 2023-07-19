@@ -1,21 +1,78 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
-*.exe
-*.exe~
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
 *.dll
 *.so
+*.so.*
 *.dylib
 
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
+# Executables
+*.exe
 *.out
+*.app
+*.i*86
+*.x86_64
+*.hex
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
 
-# Go workspace file
-go.work
+# Temporary files
+*.tmp
+*.back
+*.bck
+
+# Local IDE files
+.vscode/
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+/.idea/
+/bin/
+/bpf/libbpf/src/build/usr/include/bpf/bpf.h
+/bpf/libbpf/src/build/usr/include/bpf/bpf_core_read.h
+/bpf/libbpf/src/build/usr/include/bpf/bpf_endian.h
+/bpf/libbpf/src/build/usr/include/bpf/bpf_helper_defs.h
+/bpf/libbpf/src/build/usr/include/bpf/bpf_helpers.h
+/bpf/libbpf/src/build/usr/include/bpf/bpf_tracing.h
+/bpf/libbpf/src/build/usr/include/bpf/btf.h
+/bpf/libbpf/src/build/usr/include/bpf/libbpf.h
+/bpf/libbpf/src/build/usr/include/bpf/libbpf_common.h
+/bpf/libbpf/src/build/usr/include/bpf/xsk.h
+/bpf/kernel/xlb_dp_debug
+/bpf/kernel/xlb_libdp.skel.h
+/bpf/kernel/vmlinux.h
+/bpf/libbpf/src/libbpf.pc
+/bpf/libbpf/src/build/usr/lib64/pkgconfig/libbpf.pc
+/_dist/
