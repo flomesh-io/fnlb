@@ -68,7 +68,7 @@ clean:
 	rm -rf bin
 
 run:
-	@./bin/$(bin)
+	@./bin/$(XLB_BIN)
 
 stop:
 	@sudo killall fsmxlb >> /dev/null 2>&1 || true
