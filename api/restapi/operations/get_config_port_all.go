@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/cybwan/fsmxlb/api/models"
+	"github.com/flomesh-io/fsmxlb/api/models"
 )
 
 // GetConfigPortAllHandlerFunc turns a function with the right signature into a get config port all handler

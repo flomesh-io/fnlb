@@ -87,9 +87,9 @@ jobs:
     needs: version
     env:
       VERSION: ${{ needs.version.outputs.version }}
-      BUILD_DATE_VAR: 'github.com/cybwan/fsmxlb/pkg/version.BuildDate'
-      BUILD_VERSION_VAR: 'github.com/cybwan/fsmxlb/pkg/version.Version'
-      BUILD_GITCOMMIT_VAR: 'github.com/cybwan/fsmxlb/pkg/version.GitCommit'
+      BUILD_DATE_VAR: 'github.com/flomesh-io/fsmxlb/pkg/version.BuildDate'
+      BUILD_VERSION_VAR: 'github.com/flomesh-io/fsmxlb/pkg/version.Version'
+      BUILD_GITCOMMIT_VAR: 'github.com/flomesh-io/fsmxlb/pkg/version.GitCommit'
     strategy:
       matrix:
         id: [ "os", "xlb", "ccm" ]

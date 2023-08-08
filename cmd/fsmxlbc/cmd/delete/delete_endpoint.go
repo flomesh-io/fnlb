@@ -18,7 +18,7 @@ package delete
 import (
 	"context"
 	"fmt"
-	"github.com/cybwan/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
 	"net"
 	"net/http"
 	"os"

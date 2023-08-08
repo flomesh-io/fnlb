@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"github.com/cybwan/fsmxlb/pkg/sctp"
+	"github.com/flomesh-io/fsmxlb/pkg/sctp"
 	"golang.org/x/net/icmp"
 	"golang.org/x/net/ipv4"
 	"net"

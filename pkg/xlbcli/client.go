@@ -1,7 +1,7 @@
 package xlbcli
 
 import (
-	"github.com/cybwan/fsmxlb/pkg/common"
+	"github.com/flomesh-io/fsmxlb/pkg/common"
 	"net/http"
 	"time"
 )

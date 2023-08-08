@@ -17,17 +17,17 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/cybwan/fsmxlb/pkg/version"
-	"github.com/cybwan/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fsmxlb/pkg/version"
+	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
 	"os"
 
 	"github.com/spf13/cobra"
 
-	"github.com/cybwan/fsmxlb/cmd/fsmxlbc/cmd/create"
-	"github.com/cybwan/fsmxlb/cmd/fsmxlbc/cmd/delete"
-	"github.com/cybwan/fsmxlb/cmd/fsmxlbc/cmd/dump"
-	"github.com/cybwan/fsmxlb/cmd/fsmxlbc/cmd/get"
-	"github.com/cybwan/fsmxlb/cmd/fsmxlbc/cmd/set"
+	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/create"
+	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/delete"
+	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/dump"
+	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/get"
+	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/set"
 )
 
 var VersionCmd = &cobra.Command{

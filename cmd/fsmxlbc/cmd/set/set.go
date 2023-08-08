@@ -18,7 +18,7 @@ package set
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/cybwan/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
 	"io"
 	"net/http"
 

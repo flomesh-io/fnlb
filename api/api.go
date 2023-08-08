@@ -1,12 +1,12 @@
 package api
 
 import (
-	"github.com/cybwan/fsmxlb/api/restapi"
-	"github.com/cybwan/fsmxlb/api/restapi/handler"
-	"github.com/cybwan/fsmxlb/api/restapi/operations"
-	cmn "github.com/cybwan/fsmxlb/pkg/common"
-	"github.com/cybwan/fsmxlb/pkg/options"
-	tk "github.com/cybwan/fsmxlb/pkg/xlblib"
+	"github.com/flomesh-io/fsmxlb/api/restapi"
+	"github.com/flomesh-io/fsmxlb/api/restapi/handler"
+	"github.com/flomesh-io/fsmxlb/api/restapi/operations"
+	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
+	"github.com/flomesh-io/fsmxlb/pkg/options"
+	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
 	"github.com/go-openapi/loads"
 	flags "github.com/jessevdk/go-flags"
 	"log"

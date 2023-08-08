@@ -24,7 +24,7 @@ import (
 	flags "github.com/jessevdk/go-flags"
 	"golang.org/x/net/netutil"
 
-	"github.com/cybwan/fsmxlb/api/restapi/operations"
+	"github.com/flomesh-io/fsmxlb/api/restapi/operations"
 )
 
 const (

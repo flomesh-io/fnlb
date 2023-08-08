@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/cybwan/fsmxlb/api/models"
+	"github.com/flomesh-io/fsmxlb/api/models"
 )
 
 // DeleteConfigIpv4addressIPAddressMaskDevIfNameNoContentCode is the HTTP code returned for type DeleteConfigIpv4addressIPAddressMaskDevIfNameNoContent

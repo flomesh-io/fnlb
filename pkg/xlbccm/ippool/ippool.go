@@ -6,7 +6,7 @@ import (
 	"net"
 	"sync"
 
-	tk "github.com/cybwan/fsmxlb/pkg/xlblib"
+	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
 )
 
 type IPPool struct {

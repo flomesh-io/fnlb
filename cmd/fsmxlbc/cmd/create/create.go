@@ -17,7 +17,7 @@ package create
 
 import (
 	"fmt"
-	"github.com/cybwan/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
 	"github.com/spf13/cobra"
 )
 

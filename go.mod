@@ -1,4 +1,4 @@
-module github.com/cybwan/fsmxlb
+module github.com/flomesh-io/fsmxlb
 
 go 1.19
 

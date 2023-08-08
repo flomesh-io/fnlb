@@ -18,8 +18,8 @@ package dump
 import (
 	"errors"
 	"fmt"
-	"github.com/cybwan/fsmxlb/cmd/fsmxlbc/cmd/get"
-	"github.com/cybwan/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/get"
+	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
 	"os"
 
 	"github.com/spf13/cobra"
