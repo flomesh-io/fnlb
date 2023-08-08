@@ -71,7 +71,7 @@ run:
 	@./bin/$(XLB_BIN)
 
 stop:
-	@sudo killall fsmxlb >> /dev/null 2>&1 || true
+	@sudo killall $(XLB_BIN) >> /dev/null 2>&1 || true
 	@sudo ip link set dev flb0 xdp off >> /dev/null 2>&1 || true
 	@sudo ip link set dev flb0 xdpgeneric off >> /dev/null 2>&1 || true
 	@sudo ntc filter del dev flb0 ingress >> /dev/null 2>&1 || true
