@@ -4,14 +4,14 @@ import (
 	"crypto/tls"
 	"net/http"
 
-	opts "github.com/cybwan/fsmxlb/pkg/options"
+	opts "github.com/flomesh-io/fsmxlb/pkg/options"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/swag"
 
-	"github.com/cybwan/fsmxlb/api/restapi/handler"
-	"github.com/cybwan/fsmxlb/api/restapi/operations"
+	"github.com/flomesh-io/fsmxlb/api/restapi/handler"
+	"github.com/flomesh-io/fsmxlb/api/restapi/operations"
 )
 
 //go:generate swagger generate server --target ../../api --name FsmxlbRestAPI --spec ../swagger.yml --principal interface{}

@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	opts "github.com/cybwan/fsmxlb/pkg/options"
-	"github.com/cybwan/fsmxlb/pkg/version"
-	ln "github.com/cybwan/fsmxlb/pkg/xlbnet"
+	opts "github.com/flomesh-io/fsmxlb/pkg/options"
+	"github.com/flomesh-io/fsmxlb/pkg/version"
+	ln "github.com/flomesh-io/fsmxlb/pkg/xlbnet"
 	"github.com/jessevdk/go-flags"
 	"os"
 	"time"

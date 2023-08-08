@@ -2,7 +2,7 @@
 
 TARGETS      := darwin/amd64 darwin/arm64 linux/amd64 linux/arm64
 DIST_DIRS    := find * -type d -exec
-CTR_REGISTRY ?= cybwan
+CTR_REGISTRY ?= flomesh-io
 CTR_TAG      ?= latest
 VERIFY_TAGS  ?= false
 
@@ -13,9 +13,9 @@ DOCKER_BUILDX_OUTPUT ?= type=registry
 VERSION ?= dev
 BUILD_DATE ?=
 GIT_SHA=$$(git rev-parse HEAD)
-BUILD_DATE_VAR := github.com/cybwan/fsmxlb/pkg/version.BuildDate
-BUILD_VERSION_VAR := github.com/cybwan/fsmxlb/pkg/version.Version
-BUILD_GITCOMMIT_VAR := github.com/cybwan/fsmxlb/pkg/version.GitCommit
+BUILD_DATE_VAR := github.com/flomesh-io/fsmxlb/pkg/version.BuildDate
+BUILD_VERSION_VAR := github.com/flomesh-io/fsmxlb/pkg/version.Version
+BUILD_GITCOMMIT_VAR := github.com/flomesh-io/fsmxlb/pkg/version.GitCommit
 DOCKER_GO_VERSION = 1.19
 
 GO_LDFLAGS ?= "-X $(BUILD_DATE_VAR)=$(BUILD_DATE) -X $(BUILD_VERSION_VAR)=$(VERSION) -X $(BUILD_GITCOMMIT_VAR)=$(GIT_SHA) -s -w"

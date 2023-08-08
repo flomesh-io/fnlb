@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"github.com/cybwan/fsmxlb/api/models"
+	"github.com/flomesh-io/fsmxlb/api/models"
 )
 
 // NewPostConfigTunnelVxlanParams creates a new PostConfigTunnelVxlanParams object

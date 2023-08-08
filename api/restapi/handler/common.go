@@ -18,7 +18,7 @@ package handler
 import (
 	"net/http"
 
-	cmn "github.com/cybwan/fsmxlb/pkg/common"
+	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
 
 	"github.com/go-openapi/runtime"
 )

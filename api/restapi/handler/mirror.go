@@ -18,10 +18,10 @@ package handler
 import (
 	"net"
 
-	"github.com/cybwan/fsmxlb/api/models"
-	"github.com/cybwan/fsmxlb/api/restapi/operations"
-	cmn "github.com/cybwan/fsmxlb/pkg/common"
-	tk "github.com/cybwan/fsmxlb/pkg/xlblib"
+	"github.com/flomesh-io/fsmxlb/api/models"
+	"github.com/flomesh-io/fsmxlb/api/restapi/operations"
+	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
+	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
 
 	"github.com/go-openapi/runtime/middleware"
 )

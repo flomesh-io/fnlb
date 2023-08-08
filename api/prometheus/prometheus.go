@@ -21,8 +21,8 @@ import (
 	"sync"
 	"time"
 
-	cmn "github.com/cybwan/fsmxlb/pkg/common"
-	tk "github.com/cybwan/fsmxlb/pkg/xlblib"
+	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
+	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	dto "github.com/prometheus/client_model/go"

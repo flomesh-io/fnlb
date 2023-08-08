@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/cybwan/fsmxlb/api/models"
+	"github.com/flomesh-io/fsmxlb/api/models"
 )
 
 // NewPostConfigVlanVlanIDMemberParams creates a new PostConfigVlanVlanIDMemberParams object

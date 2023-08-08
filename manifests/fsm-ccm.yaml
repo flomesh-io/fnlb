@@ -54,7 +54,7 @@ spec:
           imagePullPolicy: Always
           # for in-tree providers we use k8s.gcr.io/cloud-controller-manager
           # this can be replaced with any other image for out-of-tree providers
-          image: cybwan/fsm-ccm:latest
+          image: flomesh-io/fsm-ccm:latest
           command:
             - /fsm-ccm
           args:
