@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"github.com/flomesh-io/fsmxlb/api/models"
+	"github.com/flomesh-io/fnlb/api/models"
 )
 
 // NewPostConfigIpv4addressParams creates a new PostConfigIpv4addressParams object

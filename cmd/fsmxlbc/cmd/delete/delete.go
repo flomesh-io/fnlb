@@ -17,7 +17,7 @@ package delete
 
 import (
 	"fmt"
-	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fnlb/pkg/xlbcli"
 	"github.com/spf13/cobra"
 )
 

@@ -1,6 +1,6 @@
 package xlbnet
 
-import tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+import tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 
 // DpEbpfSetLogLevel - Set log level for ebpf subsystem
 func DpEbpfSetLogLevel(logLevel tk.LogLevelT) {

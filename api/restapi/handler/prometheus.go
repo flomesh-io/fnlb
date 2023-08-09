@@ -18,9 +18,9 @@ package handler
 import (
 	"net/http"
 
-	"github.com/flomesh-io/fsmxlb/api/restapi/operations"
-	"github.com/flomesh-io/fsmxlb/pkg/options"
-	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+	"github.com/flomesh-io/fnlb/api/restapi/operations"
+	"github.com/flomesh-io/fnlb/pkg/options"
+	tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

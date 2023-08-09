@@ -11,8 +11,8 @@ import (
 	"sync"
 	"time"
 
-	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
-	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+	cmn "github.com/flomesh-io/fnlb/pkg/common"
+	tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 
 	api "github.com/osrg/gobgp/v3/api"
 	"github.com/osrg/gobgp/v3/pkg/apiutil"

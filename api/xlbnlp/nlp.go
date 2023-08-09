@@ -1,7 +1,7 @@
 package xlbnlp
 
 import (
-	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
+	cmn "github.com/flomesh-io/fnlb/pkg/common"
 	nlp "github.com/vishvananda/netlink"
 )
 

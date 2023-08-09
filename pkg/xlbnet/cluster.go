@@ -1,9 +1,9 @@
 package xlbnet
 
 import (
-	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
-	opts "github.com/flomesh-io/fsmxlb/pkg/options"
-	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+	cmn "github.com/flomesh-io/fnlb/pkg/common"
+	opts "github.com/flomesh-io/fnlb/pkg/options"
+	tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 
 	"bufio"
 	"errors"

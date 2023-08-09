@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/flomesh-io/fsmxlb/api/models"
+	"github.com/flomesh-io/fnlb/api/models"
 )
 
 // DeleteConfigLoadbalancerAllNoContentCode is the HTTP code returned for type DeleteConfigLoadbalancerAllNoContent

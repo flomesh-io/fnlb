@@ -22,7 +22,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/flomesh-io/fsmxlb/api/models"
+	"github.com/flomesh-io/fnlb/api/models"
 )
 
 // ProcessInfoGet- Get Process Status using "top -bn 1" command

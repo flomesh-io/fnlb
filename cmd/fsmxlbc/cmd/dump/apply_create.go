@@ -17,8 +17,8 @@ package dump
 
 import (
 	"fmt"
-	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd/create"
-	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fnlb/cmd/fsmxlbc/cmd/create"
+	"github.com/flomesh-io/fnlb/pkg/xlbcli"
 	"os"
 
 	"gopkg.in/yaml.v2"

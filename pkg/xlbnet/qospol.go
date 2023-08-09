@@ -3,8 +3,8 @@ package xlbnet
 import (
 	"errors"
 
-	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
-	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+	cmn "github.com/flomesh-io/fnlb/pkg/common"
+	tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 )
 
 // error codes

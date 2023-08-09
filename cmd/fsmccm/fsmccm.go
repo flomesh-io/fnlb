@@ -12,7 +12,7 @@ import (
 	cliflag "k8s.io/component-base/cli/flag"
 	"k8s.io/klog/v2"
 
-	_ "github.com/flomesh-io/fsmxlb/pkg/xlbccm/ccm"
+	_ "github.com/flomesh-io/fnlb/pkg/xlbccm/ccm"
 )
 
 func main() {
