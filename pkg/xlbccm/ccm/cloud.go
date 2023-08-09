@@ -2,9 +2,9 @@ package ccm
 
 import (
 	"context"
-	"github.com/flomesh-io/fsmxlb/pkg/common"
-	"github.com/flomesh-io/fsmxlb/pkg/xlbccm/client"
-	"github.com/flomesh-io/fsmxlb/pkg/xlbccm/ippool"
+	"github.com/flomesh-io/fnlb/pkg/common"
+	"github.com/flomesh-io/fnlb/pkg/xlbccm/client"
+	"github.com/flomesh-io/fnlb/pkg/xlbccm/ippool"
 	"io"
 	"net/url"
 	"time"
@@ -14,7 +14,7 @@ import (
 	cloudprovider "k8s.io/cloud-provider"
 	"k8s.io/klog/v2"
 
-	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+	tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 )
 
 type LBMode int32

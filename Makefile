@@ -23,9 +23,9 @@ endif
 VERSION ?= dev
 BUILD_DATE ?= $$(date +%Y-%m-%d-%H:%M)
 GIT_SHA=$$(git rev-parse HEAD)
-BUILD_DATE_VAR := github.com/flomesh-io/fsmxlb/pkg/version.BuildDate
-BUILD_VERSION_VAR := github.com/flomesh-io/fsmxlb/pkg/version.Version
-BUILD_GITCOMMIT_VAR := github.com/flomesh-io/fsmxlb/pkg/version.GitCommit
+BUILD_DATE_VAR := github.com/flomesh-io/fnlb/pkg/version.BuildDate
+BUILD_VERSION_VAR := github.com/flomesh-io/fnlb/pkg/version.Version
+BUILD_GITCOMMIT_VAR := github.com/flomesh-io/fnlb/pkg/version.GitCommit
 
 GO_LDFLAGS ?= "-X $(BUILD_DATE_VAR)=$(BUILD_DATE) -X $(BUILD_VERSION_VAR)=$(VERSION) -X $(BUILD_GITCOMMIT_VAR)=$(GIT_SHA) -s -w"
 

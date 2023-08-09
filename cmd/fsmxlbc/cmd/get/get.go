@@ -17,7 +17,7 @@ package get
 
 import (
 	"fmt"
-	"github.com/flomesh-io/fsmxlb/pkg/xlbcli"
+	"github.com/flomesh-io/fnlb/pkg/xlbcli"
 	"os"
 
 	"github.com/olekukonko/tablewriter"

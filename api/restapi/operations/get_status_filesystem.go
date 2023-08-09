@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/flomesh-io/fsmxlb/api/models"
+	"github.com/flomesh-io/fnlb/api/models"
 )
 
 // GetStatusFilesystemHandlerFunc turns a function with the right signature into a get status filesystem handler

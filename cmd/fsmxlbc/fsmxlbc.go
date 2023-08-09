@@ -16,7 +16,7 @@
 package main
 
 import (
-	"github.com/flomesh-io/fsmxlb/cmd/fsmxlbc/cmd"
+	"github.com/flomesh-io/fnlb/cmd/fsmxlbc/cmd"
 )
 
 func main() {

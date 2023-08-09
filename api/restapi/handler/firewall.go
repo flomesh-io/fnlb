@@ -18,10 +18,10 @@ package handler
 import (
 	"fmt"
 
-	"github.com/flomesh-io/fsmxlb/api/models"
-	"github.com/flomesh-io/fsmxlb/api/restapi/operations"
-	cmn "github.com/flomesh-io/fsmxlb/pkg/common"
-	tk "github.com/flomesh-io/fsmxlb/pkg/xlblib"
+	"github.com/flomesh-io/fnlb/api/models"
+	"github.com/flomesh-io/fnlb/api/restapi/operations"
+	cmn "github.com/flomesh-io/fnlb/pkg/common"
+	tk "github.com/flomesh-io/fnlb/pkg/xlblib"
 	"github.com/go-openapi/runtime/middleware"
 )
 

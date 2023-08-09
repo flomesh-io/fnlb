@@ -18,7 +18,7 @@ package get
 import (
 	"errors"
 	"fmt"
-	mp "github.com/flomesh-io/fsmxlb/pkg/multiplatform"
+	mp "github.com/flomesh-io/fnlb/pkg/multiplatform"
 	"net"
 	"os"
 	"os/exec"

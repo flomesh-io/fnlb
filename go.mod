@@ -1,4 +1,4 @@
-module github.com/flomesh-io/fsmxlb
+module github.com/flomesh-io/fnlb
 
 go 1.19
 

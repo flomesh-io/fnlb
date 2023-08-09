@@ -5,7 +5,7 @@ package xlblib
 
 import (
 	"fmt"
-	"github.com/flomesh-io/fsmxlb/pkg/sctp"
+	"github.com/flomesh-io/fnlb/pkg/sctp"
 	"net"
 	"testing"
 )
