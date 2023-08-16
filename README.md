@@ -13,6 +13,7 @@ reboot
 ```bash
 make subsys
 make build
+make build-cli
 ```
 
 ## How to test ?
